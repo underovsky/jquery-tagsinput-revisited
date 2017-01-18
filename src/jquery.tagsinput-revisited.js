@@ -25,7 +25,7 @@
 
 			value = jQuery.trim(value);
 			
-			if ((options.unique && $(this).tagExist(value)) || !_validateTag(value, options)) {
+			if ((options.unique && $(this).tagExist(value)) || !_validateTag(value, options, tagslist)) {
 				$('#' + id + '_tag').addClass('error');
 				return false;
 			}
@@ -109,6 +109,7 @@
 			placeholder: 'Add a tag',
 			minChars: 0,
 			maxChars: null,
+			limit: null,
 			width: 'auto',
 			height: 'auto',
 			autocomplete: {selectFirst: false},
@@ -194,7 +195,8 @@
 								focus: true,
 								unique: settings.unique,
 								minChars: settings.minChars,
-								maxChars: settings.maxChars
+								maxChars: settings.maxChars,
+								limit: settings.limit
 							});
 						}
 					});
@@ -205,7 +207,8 @@
 							focus: true,
 							unique: settings.unique,
 							minChars: settings.minChars,
-							maxChars: settings.maxChars
+							maxChars: settings.maxChars,
+							limit: settings.limit
 						});
 						
 						return false;
@@ -217,7 +220,8 @@
 						focus: true,
 						unique: settings.unique,
 						minChars: settings.minChars,
-						maxChars: settings.maxChars
+						maxChars: settings.maxChars,
+						limit: settings.limit
 					});
 					
 					return false;
@@ -233,7 +237,8 @@
 						focus: true,
 						unique: settings.unique,
 						minChars: settings.minChars,
-						maxChars: settings.maxChars
+						maxChars: settings.maxChars,
+						limit: settings.limit
 					});
 					
 					return false;
@@ -280,7 +285,8 @@
 				focus: false,
 				callback: false,
 				minChars: 0,
-				maxChars: null
+				maxChars: null,
+				limit: null
 			});
 		}
 		
@@ -290,12 +296,13 @@
 		}
 	};
 	
-	var _validateTag = function(value, options) {
+	var _validateTag = function(value, options, tagslist) {
 		var result = true;
 		
 		if (value === '') result = false;
 		if (value.length < options.minChars) result = false;
 		if (options.maxChars !== null && value.length > options.maxChars) result = false;
+		if (options.limit !== null && tagslist.length >= options.limit) result = false;
 		
 		return result;
 	};
