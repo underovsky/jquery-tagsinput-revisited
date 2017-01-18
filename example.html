@@ -10,18 +10,52 @@
 		
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="src/jquery.tagsinput-revisited.js"></script>
+		
+		<style>
+			body, html {
+				font-family: sans-serif;
+			}
+			
+			label {
+				display: block;
+				margin: 20px 0 5px 0;
+			}
+		</style>
 	</head>
 	<body>
-		<form id="form-1">
-			<label>Defaults:</label>
-			<input id="form-1-tags" name="tags" type="text" value="foo,bar,baz,roffle">
+		<form id="form">
+			<label>Simple tags input:</label>
+			<input id="form-tags-1" name="tags-1" type="text" value="foo,bar,baz,roffle">
+			
+			<label>Tags input with callbacks (check console):</label>
+			<input id="form-tags-2" name="tags-2" type="text" value="foo,bar,baz,roffle">
+			
+			<label>Tags input with various validation:</label>
+			<input id="form-tags-3" name="tags-3" type="text" value="">
+			
+			<!-- TODO: autocomplete -->
 		</form>
 		
 		<script type="text/javascript">
 			$(function() {
-				$('#form-1-tags').tagsInput({
-					width: 'auto',
-					interactive: true
+				$('#form-tags-1').tagsInput();
+				
+				$('#form-tags-2').tagsInput({
+					'onAddTag': function($el, value) {
+						console.log('tag added');
+					},
+					'onRemoveTag': function($el, value) {
+						console.log('tag removed');
+					},
+					'onChange': function($el, $el2, value) {
+						console.log('change triggered');
+					}
+				});
+				
+				$('#form-tags-3').tagsInput({
+					'minChars': 2,
+					'maxChars': 10,
+					'limit': 5
 				});
 			});
 		</script>
