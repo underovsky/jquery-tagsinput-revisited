@@ -269,7 +269,6 @@
 		$(obj).val(tagslist.join(delimiter[id]));
 	};
 
-	// TODO: verify
 	$.fn.tagsInput.importTags = function(obj, val) {
 		$(obj).val('');
 		
