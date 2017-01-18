@@ -55,7 +55,8 @@
 				$('#form-tags-3').tagsInput({
 					'minChars': 2,
 					'maxChars': 10,
-					'limit': 5
+					'limit': 5,
+					'validationPattern': new RegExp('^[a-zA-Z]+$')
 				});
 			});
 		</script>

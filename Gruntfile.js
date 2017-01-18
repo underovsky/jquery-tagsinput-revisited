@@ -1,3 +1,5 @@
+// TODO: append license comment to min.js file
+
 function loadConfig(path) {
 	var glob = require('glob');
 	var object = {};

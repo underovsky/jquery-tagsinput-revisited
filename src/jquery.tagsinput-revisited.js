@@ -110,6 +110,7 @@
 			minChars: 0,
 			maxChars: null,
 			limit: null,
+			validationPattern: null,
 			width: 'auto',
 			height: 'auto',
 			autocomplete: {selectFirst: false},
@@ -196,7 +197,8 @@
 								unique: settings.unique,
 								minChars: settings.minChars,
 								maxChars: settings.maxChars,
-								limit: settings.limit
+								limit: settings.limit,
+								validationPattern: settings.validationPattern
 							});
 						}
 					});
@@ -208,7 +210,8 @@
 							unique: settings.unique,
 							minChars: settings.minChars,
 							maxChars: settings.maxChars,
-							limit: settings.limit
+							limit: settings.limit,
+							validationPattern: settings.validationPattern
 						});
 						
 						return false;
@@ -221,7 +224,8 @@
 						unique: settings.unique,
 						minChars: settings.minChars,
 						maxChars: settings.maxChars,
-						limit: settings.limit
+						limit: settings.limit,
+						validationPattern: settings.validationPattern
 					});
 					
 					return false;
@@ -238,7 +242,8 @@
 						unique: settings.unique,
 						minChars: settings.minChars,
 						maxChars: settings.maxChars,
-						limit: settings.limit
+						limit: settings.limit,
+						validationPattern: settings.validationPattern
 					});
 					
 					return false;
@@ -286,7 +291,8 @@
 				callback: false,
 				minChars: 0,
 				maxChars: null,
-				limit: null
+				limit: null,
+				validationPattern: null
 			});
 		}
 		
@@ -303,6 +309,7 @@
 		if (value.length < options.minChars) result = false;
 		if (options.maxChars !== null && value.length > options.maxChars) result = false;
 		if (options.limit !== null && tagslist.length >= options.limit) result = false;
+		if (options.validationPattern !== null && !options.validationPattern.test(value)) result = false;
 		
 		return result;
 	};
