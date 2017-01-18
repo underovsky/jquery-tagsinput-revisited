@@ -3,10 +3,6 @@
  * Copyright (c) Krzysztof Rusnarczyk
  * Licensed under the MIT license */
 
-/*
- * TODO: delimiter fixes
- */
-
 (function($) {
 	var delimiter = [];
 	var callbacks = [];
@@ -232,7 +228,9 @@
 				});
 			}
 			
-			// If a user types a delimiter or enter create a new tag
+			// TODO: keypress and input cannot interfere with each other (validation perspective also)
+			
+			// If a user types a delimiter create a new tag
 			$(data.fake_input).on('keypress', data, function(event) {
 				if (_checkDelimiter(event)) {
 					event.preventDefault();
@@ -245,6 +243,31 @@
 						limit: settings.limit,
 						validationPattern: settings.validationPattern
 					});
+					
+					return false;
+				}
+			});
+			
+			// If a user pastes the text check if it shouldn't be splitted into tags
+			$(data.fake_input).bind('input', data, function(event) {
+				var value = $(event.data.fake_input).val();
+				
+				value = value.replace(/\n/g, '');
+				value = value.replace(/\s/g, '');
+				
+				var tags = _splitIntoTags(event, value);
+				
+				if (tags.length > 0) {
+					for (var i = 0; i < tags.length; ++i) {
+						$(event.data.real_input).addTag(tags[i], {
+							focus: true,
+							unique: settings.unique,
+							minChars: settings.minChars,
+							maxChars: settings.maxChars,
+							limit: settings.limit,
+							validationPattern: settings.validationPattern
+						});
+					}
 					
 					return false;
 				}
@@ -322,7 +345,7 @@
 		}
 
 		if (typeof event.data.delimiter === 'string') {
-			if (event.which == event.data.delimiter.charCodeAt(0)) {
+			if (event.which === event.data.delimiter.charCodeAt(0)) {
 				found = true;
 			}
 		} else {
@@ -334,5 +357,33 @@
 		}
 		
 		return found;
+	 };
+	 
+	 var _splitIntoTags = function(event, value) {
+		 if (value === '') return [];
+		 
+		 var tags;
+		 if (typeof event.data.delimiter === 'string') {
+			 tags = value.split(event.data.delimiter);
+			 
+			 if (tags.length > 1) {
+				 return tags;
+			 } else {
+				 return [];
+			 }
+		 } else {
+			 $.each(event.data.delimiter, function(index, delimiter) {
+				 tags = value.split(delimiter);
+				 if (tags.length > 1) {
+					 return false;
+				 } else {
+					 tags = [];
+				 }
+			 });
+			 
+			 return tags;
+		 }
+		 
+		 return [];
 	 };
 })(jQuery);
