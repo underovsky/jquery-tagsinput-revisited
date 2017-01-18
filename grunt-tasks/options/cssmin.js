@@ -4,7 +4,7 @@ module.exports = {
    },
    plugin: {
       files: {
-         'dist/jquery.tagsinput.min.css': ['src/jquery.tagsinput.css']
+         'dist/jquery.tagsinput-revisited.min.css': ['src/jquery.tagsinput-revisited.css']
       }
    }
 };
