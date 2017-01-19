@@ -51,15 +51,15 @@
 			<input id="form-tags-4" name="tags-4" type="text" value="">
 			
 			<label>Tags input with semicolon delimiter:</label>
-			<input id="form-tags-5" name="tags-4" type="text" value="foo;bar">
+			<input id="form-tags-5" name="tags-5" type="text" value="foo;bar">
 			
 			<label>Tags input with array of delimiters (comma and semicolon):</label>
-			<input id="form-tags-6" name="tags-4" type="text" value="foo;bar">
+			<input id="form-tags-6" name="tags-6" type="text" value="foo;bar">
 		</form>
 		
 		<script type="text/javascript">
 			$(function() {
-				$('#form-tags-1').tagsInput({interactive: false});
+				$('#form-tags-1').tagsInput();
 				
 				$('#form-tags-2').tagsInput({
 					'onAddTag': function($el, value) {
