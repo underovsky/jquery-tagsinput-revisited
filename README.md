@@ -101,7 +101,7 @@ By default, if the cursor is immediately after a tag, hitting backspace will del
 
 For validation purposes you an use `unique`, `limit`, `minChars`, `maxChars` and `validationPattern` parameters.
 
-You can check `example.html` file to see plugin usage examples.
+You can check `example.html` file to see the plugin usage examples.
 
 ## Options
 
@@ -111,12 +111,12 @@ $('.tagsinput#tags').tagsInput({
   placeholder: 'Add a tag',
   minChars: 2,
   maxChars: 20, // if not provided there is no limit
-  limit: 5,
-  validationPattern: new RegExp('^[a-zA-Z]+$'), // pattern you can use to validate input
+  limit: 5, // if not provided there is no limit
+  validationPattern: new RegExp('^[a-zA-Z]+$'), // a pattern you can use to validate the input
   width: '300px', // standard option is 'auto'
   height: '100px', // standard option is 'auto'
   autocomplete: { option: value, option: value},
-  autocomplete_url: url_to_autocomplete_api,
+  autocomplete_url: 'URL',
   hide: true,
   delimiter: [',',';'], // or a string with a single delimiter. Ex: ';'
   unique: true,
