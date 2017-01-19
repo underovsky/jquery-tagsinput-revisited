@@ -22,7 +22,7 @@
 
 			value = jQuery.trim(value);
 			
-			if ((options.unique && $(this).tagExist(value)) || !_validateTag(value, inputSettings[id], tagslist, delimiter[id])) {
+			if ((inputSettings[id].unique && $(this).tagExist(value)) || !_validateTag(value, inputSettings[id], tagslist, delimiter[id])) {
 				$('#' + id + '_tag').addClass('error');
 				return false;
 			}
@@ -144,7 +144,8 @@
 				minChars: settings.minChars,
 				maxChars: settings.maxChars,
 				limit: settings.limit,
-				validationPattern: settings.validationPattern
+				validationPattern: settings.validationPattern,
+				unique: settings.unique
 			};
 
 			if (settings.onAddTag || settings.onRemoveTag || settings.onChange) {
