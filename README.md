@@ -101,6 +101,8 @@ By default, if the cursor is immediately after a tag, hitting backspace will del
 
 For validation purposes you an use `unique`, `limit`, `minChars`, `maxChars` and `validationPattern` parameters.
 
+You can check `example.html` file to see plugin usage examples.
+
 ## Options
 
 ```
