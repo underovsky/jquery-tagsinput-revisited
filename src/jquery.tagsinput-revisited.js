@@ -205,7 +205,9 @@
 				});
 				
 				$(data.fake_input).on('keypress', data, function(event) {
-					$(this).autocomplete("close");
+					if (_checkDelimiter(event)) {
+						$(this).autocomplete("close");
+					}
 				});
 			} else {
 				$(data.fake_input).on('blur', data, function(event) {
