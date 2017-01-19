@@ -113,6 +113,12 @@ $('.tagsinput#tags').tagsInput({
 });
 ```
 
+## About the author
+
+* [underovsky.com](http://underovsky.com)
+* [twitter.com/underovsky](https://twitter.com/underovsky)
+* [facebook.com/underovsky](https://facebook.com/underovsky)
+
 ## License
 
 The MIT License (MIT)

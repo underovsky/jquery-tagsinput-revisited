@@ -50,7 +50,7 @@
 				f.call(this, value);
 			}
 			
-			if(callbacks[id] && callbacks[id]['onChange']) {
+			if (callbacks[id] && callbacks[id]['onChange']) {
 				var i = tagslist.length;
 				var f = callbacks[id]['onChange'];
 				f.call(this, $(this), tagslist[i - 1]);
@@ -171,8 +171,8 @@
 				$.fn.tagsInput.importTags($(data.real_input), $(data.real_input).val());
 			}
 			
-			// Stop here if interactive options is not chosen
-			if (!settings.interactive) return this;
+			// Stop here if interactive option is not chosen
+			if (!settings.interactive) return;
 			
 			$(data.fake_input).val('');
 			$(data.fake_input).data('pasted', false);
