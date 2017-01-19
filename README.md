@@ -33,7 +33,7 @@ Add the Javascript and CSS files to the HTML. You can use regular or minified fi
 <link rel="stylesheet" type="text/css" href="jquery.tagsinput-revisited.css">
 ```
 
-Create a real input in your form that will contain a delimiter-separated (by standard it's comma) list of tags. You can put any default or existing tags in the value attribute, and they'll be handled properly.
+Create a real input in your form that will contain a delimiter-separated (by standard it's a comma) list of tags. You can put any default or existing tags in the value attribute, and they'll be handled properly.
 
 ```
 <input name="tags" id="tags" class="tagsinput" value="foo,bar,baz">
