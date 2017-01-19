@@ -5,16 +5,13 @@
 
 (function($) {
 	var delimiter = [];
+	var inputSettings = [];
 	var callbacks = [];
 
 	$.fn.addTag = function(value, options) {
 		options = jQuery.extend({
 			focus: false,
-			callback: true,
-			minChars: 0,
-			maxChars: null,
-			limit: null,
-			validationPattern: null
+			callback: true
 		}, options);
 		
 		this.each(function() {
@@ -25,7 +22,7 @@
 
 			value = jQuery.trim(value);
 			
-			if ((options.unique && $(this).tagExist(value)) || !_validateTag(value, options, tagslist, delimiter[id])) {
+			if ((options.unique && $(this).tagExist(value)) || !_validateTag(value, inputSettings[id], tagslist, delimiter[id])) {
 				$('#' + id + '_tag').addClass('error');
 				return false;
 			}
@@ -131,7 +128,7 @@
 			
 			var id = $(this).attr('id');
 			if (!id || _getDelimiter(delimiter[$(this).attr('id')])) {
-				id = $(this).attr('id', 'tags' + new Date().getTime() + (uniqueIdCounter++)).attr('id');
+				id = $(this).attr('id', 'tags' + new Date().getTime() + (++uniqueIdCounter)).attr('id');
 			}
 
 			var data = jQuery.extend({
@@ -143,6 +140,12 @@
 			}, settings);
 
 			delimiter[id] = data.delimiter;
+			inputSettings[id] = {
+				minChars: settings.minChars,
+				maxChars: settings.maxChars,
+				limit: settings.limit,
+				validationPattern: settings.validationPattern
+			};
 
 			if (settings.onAddTag || settings.onRemoveTag || settings.onChange) {
 				callbacks[id] = [];
@@ -190,11 +193,7 @@
 				$(data.fake_input).on('autocompleteselect', data, function(event, ui) {
 					$(event.data.real_input).addTag(ui.item.value, {
 						focus: true,
-						unique: settings.unique,
-						minChars: settings.minChars,
-						maxChars: settings.maxChars,
-						limit: settings.limit,
-						validationPattern: settings.validationPattern
+						unique: settings.unique
 					});
 					
 					return false;
@@ -209,11 +208,7 @@
 				$(data.fake_input).on('blur', data, function(event) {
 					$(event.data.real_input).addTag($(event.data.fake_input).val(), {
 						focus: true,
-						unique: settings.unique,
-						minChars: settings.minChars,
-						maxChars: settings.maxChars,
-						limit: settings.limit,
-						validationPattern: settings.validationPattern
+						unique: settings.unique
 					});
 					
 					return false;
@@ -227,11 +222,7 @@
 					
 					$(event.data.real_input).addTag($(event.data.fake_input).val(), {
 						focus: true,
-						unique: settings.unique,
-						minChars: settings.minChars,
-						maxChars: settings.maxChars,
-						limit: settings.limit,
-						validationPattern: settings.validationPattern
+						unique: settings.unique
 					});
 					
 					return false;
@@ -259,11 +250,7 @@
 					for (var i = 0; i < tags.length; ++i) {
 						$(event.data.real_input).addTag(tags[i], {
 							focus: true,
-							unique: settings.unique,
-							minChars: settings.minChars,
-							maxChars: settings.maxChars,
-							limit: settings.limit,
-							validationPattern: settings.validationPattern
+							unique: settings.unique
 						});
 					}
 					
@@ -308,11 +295,7 @@
 		for (i = 0; i < tags.length; ++i) {
 			$(obj).addTag(tags[i], {
 				focus: false,
-				callback: false,
-				minChars: 0,
-				maxChars: null,
-				limit: null,
-				validationPattern: null
+				callback: false
 			});
 		}
 		
@@ -332,14 +315,14 @@
 		}
 	};
 	
-	var _validateTag = function(value, options, tagslist, delimiter) {
+	var _validateTag = function(value, inputSettings, tagslist, delimiter) {
 		var result = true;
 		
 		if (value === '') result = false;
-		if (value.length < options.minChars) result = false;
-		if (options.maxChars !== null && value.length > options.maxChars) result = false;
-		if (options.limit !== null && tagslist.length >= options.limit) result = false;
-		if (options.validationPattern !== null && !options.validationPattern.test(value)) result = false;
+		if (value.length < inputSettings.minChars) result = false;
+		if (inputSettings.maxChars !== null && value.length > inputSettings.maxChars) result = false;
+		if (inputSettings.limit !== null && tagslist.length >= inputSettings.limit) result = false;
+		if (inputSettings.validationPattern !== null && !inputSettings.validationPattern.test(value)) result = false;
 		
 		if (typeof delimiter === 'string') {
 			if (value.indexOf(delimiter) > -1) result = false;
