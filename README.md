@@ -15,6 +15,7 @@ Original description: Do you use tags to organize content on your site? This plu
 ## Improvements
 
 jQuery Tags Input Revisited welcomes few very important improvements:
+
 1. It switches input width adjustment from JS to flexbox.
 2. It manipulates styles with CSS not JS.
 3. It uses standard placeholder instead of input value.
