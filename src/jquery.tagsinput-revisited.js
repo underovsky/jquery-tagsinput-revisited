@@ -172,14 +172,10 @@
 			
 			$(data.fake_input).val('');
 			$(data.fake_input).data('pasted', false);
-
-			$(data.holder).on('click', data, function(event) {
-				$(event.data.fake_input).focus();
-				$(this).addClass('focus');
-			});
 			
 			$(data.fake_input).on('focus', data, function(event) {
 				$(data.holder).addClass('focus');
+				
 				if ($(this).val() === '') {
 					$(this).removeClass('error');
 				}
