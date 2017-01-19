@@ -62,14 +62,14 @@
 				$('#form-tags-1').tagsInput();
 				
 				$('#form-tags-2').tagsInput({
-					'onAddTag': function($el, value) {
-						console.log('tag added');
+					'onAddTag': function(input, value) {
+						console.log('tag added', input, value);
 					},
-					'onRemoveTag': function($el, value) {
-						console.log('tag removed');
+					'onRemoveTag': function(input, value) {
+						console.log('tag removed', input, value);
 					},
-					'onChange': function($el, $el2, value) {
-						console.log('change triggered');
+					'onChange': function(input, value) {
+						console.log('change triggered', input, value);
 					}
 				});
 				

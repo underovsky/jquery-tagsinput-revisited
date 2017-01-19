@@ -47,13 +47,13 @@
 
 			if (options.callback && callbacks[id] && callbacks[id]['onAddTag']) {
 				var f = callbacks[id]['onAddTag'];
-				f.call(this, value);
+				f.call(this, this, value);
 			}
 			
 			if (callbacks[id] && callbacks[id]['onChange']) {
 				var i = tagslist.length;
 				var f = callbacks[id]['onChange'];
-				f.call(this, $(this), tagslist[i - 1]);
+				f.call(this, this, value);
 			}
 		});
 
@@ -81,7 +81,7 @@
 
 			if (callbacks[id] && callbacks[id]['onRemoveTag']) {
 				var f = callbacks[id]['onRemoveTag'];
-				f.call(this, value);
+				f.call(this, this, value);
 			}
 		});
 
@@ -247,7 +247,7 @@
 				
 				var tags = _splitIntoTags(event.data.delimiter, value);
 				
-				if (tags.length > 0) {
+				if (tags.length > 1) {
 					for (var i = 0; i < tags.length; ++i) {
 						$(event.data.real_input).addTag(tags[i], {
 							focus: true,
@@ -302,7 +302,7 @@
 		
 		if (callbacks[id] && callbacks[id]['onChange']) {
 			var f = callbacks[id]['onChange'];
-			f.call(obj, obj, tags[i]);
+			f.call(obj, obj, tags);
 		}
 	};
 	
@@ -363,13 +363,7 @@
 		 if (value === '') return [];
 		 
 		 if (typeof delimiter === 'string') {
-			 var tags = value.split(delimiter);
-			 
-			 if (tags.length > 1) {
-				 return tags;
-			 } else {
-				 return [];
-			 }
+			 return value.split(delimiter);
 		 } else {
 			 var tmpDelimiter = '∞';
 			 var text = value;
@@ -378,13 +372,7 @@
 				 text = text.split(_delimiter).join(tmpDelimiter);
 			 });
 			 
-			 var tags = text.split(tmpDelimiter);
-			 
-			 if (tags.length > 1) {
-				 return tags;
-			 } else {
-				 return [];
-			 }
+			 return text.split(tmpDelimiter);
 		 }
 		 
 		 return [];
