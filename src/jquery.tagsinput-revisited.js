@@ -25,7 +25,7 @@
 
 			value = jQuery.trim(value);
 			
-			if ((options.unique && $(this).tagExist(value)) || !_validateTag(value, options, tagslist)) {
+			if ((options.unique && $(this).tagExist(value)) || !_validateTag(value, options, tagslist, delimiter[id])) {
 				$('#' + id + '_tag').addClass('error');
 				return false;
 			}
@@ -172,6 +172,7 @@
 			if (!settings.interactive) return this;
 			
 			$(data.fake_input).val('');
+			$(data.fake_input).data('pasted', false);
 
 			$(data.holder).on('click', data, function(event) {
 				$(event.data.fake_input).focus();
@@ -180,6 +181,9 @@
 			
 			$(data.fake_input).on('focus', data, function(event) {
 				$(data.holder).addClass('focus');
+				if ($(this).val() === '') {
+					$(this).removeClass('error');
+				}
 			});
 			
 			$(data.fake_input).on('blur', data, function(event) {
@@ -237,8 +241,6 @@
 				});
 			}
 			
-			// TODO: keypress and input cannot interfere with each other (look at validation perspective also)
-			
 			// If a user types a delimiter create a new tag
 			$(data.fake_input).on('keypress', data, function(event) {
 				if (_checkDelimiter(event)) {
@@ -257,8 +259,16 @@
 				}
 			});
 			
+			$(data.fake_input).on('paste', function () {
+				$(this).data('pasted', true);
+			});
+			
 			// If a user pastes the text check if it shouldn't be splitted into tags
-			$(data.fake_input).bind('input', data, function(event) {
+			$(data.fake_input).on('input', data, function(event) {
+				if (!$(this).data('pasted')) return;
+				
+				$(this).data('pasted', false);
+				
 				var value = $(event.data.fake_input).val();
 				
 				value = value.replace(/\n/g, '');
@@ -292,15 +302,15 @@
 					 $(this).trigger('focus');
 				}
 			});
-			
-			$(data.fake_input).blur();
 
 			// Removes the error class when user changes the value of the fake input
-			if (data.unique) {
-				$(data.fake_input).keydown(function(event) {
+			$(data.fake_input).keydown(function(event) {
+				console.log('?');
+				// alt, shift, esc, ctrl and arrows keys are not taken into consideration 
+				// if (!$.inArray(event.keyCode, [37, 38, 39, 40, 27, 16, 17, 225])) {
 					$(this).removeClass('error');
-				});
-			}
+				// }
+			});
 		});
 
 		return this;
@@ -344,7 +354,7 @@
 		}
 	};
 	
-	var _validateTag = function(value, options, tagslist) {
+	var _validateTag = function(value, options, tagslist, delimiter) {
 		var result = true;
 		
 		if (value === '') result = false;
@@ -352,6 +362,15 @@
 		if (options.maxChars !== null && value.length > options.maxChars) result = false;
 		if (options.limit !== null && tagslist.length >= options.limit) result = false;
 		if (options.validationPattern !== null && !options.validationPattern.test(value)) result = false;
+		
+		if (typeof delimiter === 'string') {
+			if (value.indexOf(delimiter) > -1) result = false;
+		} else {
+			$.each(delimiter, function(index, _delimiter) {
+				if (value.indexOf(_delimiter) > -1) result = false;
+				return false;
+			});
+		}
 		
 		return result;
 	};
