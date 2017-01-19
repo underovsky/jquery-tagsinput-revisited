@@ -20,7 +20,7 @@
 		this.each(function() {
 			var id = $(this).attr('id');
 
-			var tagslist = $(this).val().split(delimiter[id]);
+			var tagslist = $(this).val().split(_getDelimiter(delimiter[id]));
 			if (tagslist[0] === '') tagslist = [];
 
 			value = jQuery.trim(value);
@@ -69,14 +69,14 @@
 		this.each(function() {
 			var id = $(this).attr('id');
 
-			var old = $(this).val().split(delimiter[id]);
+			var old = $(this).val().split(_getDelimiter(delimiter[id]));
 
 			$('#' + id + '_tagsinput .tag').remove();
 			
 			var str = '';
 			for (i = 0; i < old.length; ++i) {
 				if (old[i] != value) {
-					str = str + delimiter[id] + old[i];
+					str = str + _getDelimiter(delimiter[id]) + old[i];
 				}
 			}
 
@@ -93,7 +93,7 @@
 
 	$.fn.tagExist = function(val) {
 		var id = $(this).attr('id');
-		var tagslist = $(this).val().split(delimiter[id]);
+		var tagslist = $(this).val().split(_getDelimiter(delimiter[id]));
 		return (jQuery.inArray(val, tagslist) >= 0);
 	};
 
@@ -131,7 +131,7 @@
 			if (settings.hide) $(this).hide();
 			
 			var id = $(this).attr('id');
-			if (!id || delimiter[$(this).attr('id')]) {
+			if (!id || _getDelimiter(delimiter[$(this).attr('id')])) {
 				id = $(this).attr('id', 'tags' + new Date().getTime() + (uniqueIdCounter++)).attr('id');
 			}
 
@@ -176,6 +176,10 @@
 			$(data.holder).on('click', data, function(event) {
 				$(event.data.fake_input).focus();
 				$(this).addClass('focus');
+			});
+			
+			$(data.fake_input).on('focus', data, function(event) {
+				$(data.holder).addClass('focus');
 			});
 			
 			$(data.fake_input).on('blur', data, function(event) {
@@ -260,7 +264,7 @@
 				value = value.replace(/\n/g, '');
 				value = value.replace(/\s/g, '');
 				
-				var tags = _splitIntoTags(event, value);
+				var tags = _splitIntoTags(event.data.delimiter, value);
 				
 				if (tags.length > 0) {
 					for (var i = 0; i < tags.length; ++i) {
@@ -304,14 +308,14 @@
 	
 	$.fn.tagsInput.updateTagsField = function(obj, tagslist) {
 		var id = $(obj).attr('id');
-		$(obj).val(tagslist.join(delimiter[id]));
+		$(obj).val(tagslist.join(_getDelimiter(delimiter[id])));
 	};
 
 	$.fn.tagsInput.importTags = function(obj, val) {
 		$(obj).val('');
 		
 		var id = $(obj).attr('id');
-		var tags = val.split(delimiter[id]);
+		var tags = _splitIntoTags(delimiter[id], val); 
 		
 		for (i = 0; i < tags.length; ++i) {
 			$(obj).addTag(tags[i], {
@@ -327,6 +331,16 @@
 		if (callbacks[id] && callbacks[id]['onChange']) {
 			var f = callbacks[id]['onChange'];
 			f.call(obj, obj, tags[i]);
+		}
+	};
+	
+	var _getDelimiter = function(delimiter) {
+		if (typeof delimiter === 'undefined') {
+			return delimiter;
+		} else if (typeof delimiter === 'string') {
+			return delimiter;
+		} else {
+			return delimiter[0];
 		}
 	};
 	
@@ -364,12 +378,11 @@
 		return found;
 	 };
 	 
-	 var _splitIntoTags = function(event, value) {
+	 var _splitIntoTags = function(delimiter, value) {
 		 if (value === '') return [];
 		 
-		 var tags;
-		 if (typeof event.data.delimiter === 'string') {
-			 tags = value.split(event.data.delimiter);
+		 if (typeof delimiter === 'string') {
+			 var tags = value.split(delimiter);
 			 
 			 if (tags.length > 1) {
 				 return tags;
@@ -377,16 +390,20 @@
 				 return [];
 			 }
 		 } else {
-			 $.each(event.data.delimiter, function(index, delimiter) {
-				 tags = value.split(delimiter);
-				 if (tags.length > 1) {
-					 return false;
-				 } else {
-					 tags = [];
-				 }
+			 var tmpDelimiter = '∞';
+			 var text = value;
+			 
+			 $.each(delimiter, function(index, _delimiter) {
+				 text = text.split(_delimiter).join(tmpDelimiter);
 			 });
 			 
-			 return tags;
+			 var tags = text.split(tmpDelimiter);
+			 
+			 if (tags.length > 1) {
+				 return tags;
+			 } else {
+				 return [];
+			 }
 		 }
 		 
 		 return [];
