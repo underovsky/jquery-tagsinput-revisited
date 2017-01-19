@@ -10,7 +10,11 @@
 	$.fn.addTag = function(value, options) {
 		options = jQuery.extend({
 			focus: false,
-			callback: true
+			callback: true,
+			minChars: 0,
+			maxChars: null,
+			limit: null,
+			validationPattern: null
 		}, options);
 		
 		this.each(function() {
@@ -110,6 +114,7 @@
 			width: 'auto',
 			height: 'auto',
 			autocomplete: {selectFirst: false},
+			autocomplete_url: null,
 			hide: true,
 			delimiter: ',',
 			unique: true,
@@ -177,7 +182,7 @@
 				$(data.holder).removeClass('focus');
 			});
 
-			if (settings.autocomplete_url !== undefined) {
+			if (settings.autocomplete_url !== null) {
 				var autocomplete_options = {source: settings.autocomplete_url};
 				
 				for (attrname in settings.autocomplete) {
@@ -228,7 +233,7 @@
 				});
 			}
 			
-			// TODO: keypress and input cannot interfere with each other (validation perspective also)
+			// TODO: keypress and input cannot interfere with each other (look at validation perspective also)
 			
 			// If a user types a delimiter create a new tag
 			$(data.fake_input).on('keypress', data, function(event) {
