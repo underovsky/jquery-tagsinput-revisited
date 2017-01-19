@@ -305,11 +305,10 @@
 
 			// Removes the error class when user changes the value of the fake input
 			$(data.fake_input).keydown(function(event) {
-				console.log('?');
-				// alt, shift, esc, ctrl and arrows keys are not taken into consideration 
-				// if (!$.inArray(event.keyCode, [37, 38, 39, 40, 27, 16, 17, 225])) {
+				// alt, shift, esc, ctrl and arrows keys are ignored
+				if (jQuery.inArray(event.keyCode, [37, 38, 39, 40, 27, 16, 17, 18, 225]) === -1) {
 					$(this).removeClass('error');
-				// }
+				}
 			});
 		});
 
