@@ -45,24 +45,11 @@ Then, simply call the tagsInput function on any field that should be treated as 
 $('.tagsinput').tagsInput();
 ```
 
-If you want to use jQuery.autocomplete, you can pass in a parameter with the autocomplete url.
+If you want to use jQuery.autocomplete, you can pass an object with autocomplete options (https://jqueryui.com/autocomplete/).
 
 ```
 $('.tagsinput').tagsInput({
-  autocomplete_url: 'URL'
-});
-```
-
-If you're using the bassistance jQuery.autocomplete, which takes extra parameters, you can also send in options to the autocomplete plugin, as described here.
-
-```
-$('.tagsinput#tags').tagsInput({
-  autocomplete_url: 'URL',
-  autocomplete: {
-    selectFirst: true,
-    width: '100px',
-    autoFill: true
-  }
+  autocomplete: {option: value, option: value}
 });
 ```
 
@@ -116,7 +103,6 @@ $('.tagsinput#tags').tagsInput({
   width: '300px', // standard option is 'auto'
   height: '100px', // standard option is 'auto'
   autocomplete: { option: value, option: value},
-  autocomplete_url: 'URL',
   hide: true,
   delimiter: [',',';'], // or a string with a single delimiter. Ex: ';'
   unique: true,

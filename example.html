@@ -6,12 +6,12 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="stylesheet" type="text/css" href="src/jquery.tagsinput-revisited.css" />
-		
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 		<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/jquery-ui-git.css">
 		
 		<script src="src/jquery.tagsinput-revisited.js"></script>
+		<link rel="stylesheet" href="src/jquery.tagsinput-revisited.css" />
 		
 		<style>
 			body, html {
@@ -70,7 +70,14 @@
 				});
 				
 				$('#form-tags-4').tagsInput({
-					'autocomplete_url': 'test/fake_json_endpoint.html' 
+					'autocomplete': {
+						source: [
+							'Apple',
+							'Banana',
+							'Orange',
+							'Pizza'
+						]
+					} 
 				});
 				
 				$('#form-tags-5').tagsInput({

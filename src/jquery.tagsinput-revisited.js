@@ -113,8 +113,7 @@
 			validationPattern: null,
 			width: 'auto',
 			height: 'auto',
-			autocomplete: {selectFirst: false},
-			autocomplete_url: null,
+			autocomplete: null,
 			hide: true,
 			delimiter: ',',
 			unique: true,
@@ -190,42 +189,24 @@
 				$(data.holder).removeClass('focus');
 			});
 
-			if (settings.autocomplete_url !== null) {
-				var autocomplete_options = {source: settings.autocomplete_url};
+			if (settings.autocomplete !== null && jQuery.ui.autocomplete !== undefined) {
+				$(data.fake_input).autocomplete(settings.autocomplete);
+				$(data.fake_input).on('autocompleteselect', data, function(event, ui) {
+					$(event.data.real_input).addTag(ui.item.value, {
+						focus: true,
+						unique: settings.unique,
+						minChars: settings.minChars,
+						maxChars: settings.maxChars,
+						limit: settings.limit,
+						validationPattern: settings.validationPattern
+					});
+					
+					return false;
+				});
 				
-				for (attrname in settings.autocomplete) {
-					autocomplete_options[attrname] = settings.autocomplete[attrname];
-				}
-
-				if (jQuery.Autocompleter !== undefined) {
-					$(data.fake_input).autocomplete(settings.autocomplete_url, settings.autocomplete);
-					$(data.fake_input).on('result', data, function(event, data, formatted) {
-						if (data) {
-							$('#' + id).addTag(data[0] + "", {
-								focus: true,
-								unique: settings.unique,
-								minChars: settings.minChars,
-								maxChars: settings.maxChars,
-								limit: settings.limit,
-								validationPattern: settings.validationPattern
-							});
-						}
-					});
-				} else if (jQuery.ui.autocomplete !== undefined) {
-					$(data.fake_input).autocomplete(autocomplete_options);
-					$(data.fake_input).on('autocompleteselect', data, function(event, ui) {
-						$(event.data.real_input).addTag(ui.item.value, {
-							focus: true,
-							unique: settings.unique,
-							minChars: settings.minChars,
-							maxChars: settings.maxChars,
-							limit: settings.limit,
-							validationPattern: settings.validationPattern
-						});
-						
-						return false;
-					});
-				}
+				$(data.fake_input).on('keypress', data, function(event) {
+					$(this).autocomplete("close");
+				});
 			} else {
 				$(data.fake_input).on('blur', data, function(event) {
 					$(event.data.real_input).addTag($(event.data.fake_input).val(), {
@@ -305,8 +286,8 @@
 
 			// Removes the error class when user changes the value of the fake input
 			$(data.fake_input).keydown(function(event) {
-				// alt, shift, esc, ctrl and arrows keys are ignored
-				if (jQuery.inArray(event.keyCode, [37, 38, 39, 40, 27, 16, 17, 18, 225]) === -1) {
+				// enter, alt, shift, esc, ctrl and arrows keys are ignored
+				if (jQuery.inArray(event.keyCode, [13, 37, 38, 39, 40, 27, 16, 17, 18, 225]) === -1) {
 					$(this).removeClass('error');
 				}
 			});
