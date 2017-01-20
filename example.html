@@ -39,10 +39,10 @@
 	<body>
 		<form id="form">
 			<label>Simple tags input:</label>
-			<input id="form-tags-1" name="tags-1" type="text" value="foo,bar,baz,roffle">
+			<input id="form-tags-1" name="tags-1" type="text" value="carrot,potato,pizza">
 			
 			<label>Tags input with callbacks (check console):</label>
-			<input id="form-tags-2" name="tags-2" type="text" value="foo,bar,baz,roffle">
+			<input id="form-tags-2" name="tags-2" type="text" value="apple,banana,pizza">
 			
 			<label>Tags input with various validation:</label>
 			<input id="form-tags-3" name="tags-3" type="text" value="">
@@ -51,10 +51,10 @@
 			<input id="form-tags-4" name="tags-4" type="text" value="">
 			
 			<label>Tags input with semicolon delimiter:</label>
-			<input id="form-tags-5" name="tags-5" type="text" value="foo;bar">
+			<input id="form-tags-5" name="tags-5" type="text" value="more;pizza">
 			
 			<label>Tags input with array of delimiters (comma and semicolon):</label>
-			<input id="form-tags-6" name="tags-6" type="text" value="foo;bar">
+			<input id="form-tags-6" name="tags-6" type="text" value="more;pizza">
 		</form>
 		
 		<script type="text/javascript">
@@ -84,10 +84,10 @@
 				$('#form-tags-4').tagsInput({
 					'autocomplete': {
 						source: [
-							'Apple',
-							'Banana',
-							'Orange',
-							'Pizza'
+							'apple',
+							'banana',
+							'orange',
+							'pizza'
 						]
 					} 
 				});
