@@ -104,7 +104,7 @@ $('.tagsinput#tags').tagsInput({
   height: '100px', // standard option is 'auto'
   autocomplete: { option: value, option: value},
   hide: true,
-  delimiter: [',',';'], // or a string with a single delimiter. Ex: ';'
+  delimiter: [',',';'], // or a string with a single delimiter
   unique: true,
   removeWithBackspace: true,
   onAddTag: callback_function,
@@ -123,4 +123,4 @@ $('.tagsinput#tags').tagsInput({
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Krzysztof Rusnarczyk
+Copyright (c) 2017 Krzysztof Rusnarczyk
