@@ -12,6 +12,10 @@ Simple tag editing written in jQuery.
 
 Original description: Do you use tags to organize content on your site? This plugin will turn your boring tag list into a magical input that turns each tag into a style-able object with its own delete link. The plugin handles all the data - your form just sees a comma-delimited list of tags!
 
+## Live example
+
+You can see plugin live example [here](https://underovsky.com/showcase/jquery-tagsinput-revisited/).
+
 ## Improvements
 
 jQuery Tags Input Revisited welcomes few very important improvements:
@@ -115,7 +119,7 @@ $('.tagsinput#tags').tagsInput({
 
 ## About the author
 
-* [underovsky.com](http://underovsky.com)
+* [underovsky.com](https://underovsky.com)
 * [twitter.com/underovsky](https://twitter.com/underovsky)
 * [facebook.com/underovsky](https://facebook.com/underovsky)
 
