@@ -2,7 +2,7 @@
 
 ## Basic information
 
-Forked from discontinued jQuery Tags Input Plugin created by [XOXCO](http://xoxco.com).
+Forked from a discontinued jQuery Tags Input Plugin created by [XOXCO](http://xoxco.com).
 
 See the original project here: https://github.com/xoxco/jQuery-Tags-Input
 
@@ -90,7 +90,7 @@ If you want a function to be called every time a tag is updated/deleted, set it 
 
 By default, if the cursor is immediately after a tag, hitting backspace will delete that tag. If you want to override this, set the `removeWithBackspace` option to false.
 
-For validation purposes you an use `unique`, `limit`, `minChars`, `maxChars` and `validationPattern` parameters.
+For validation purposes you can use `unique`, `limit`, `minChars`, `maxChars` and `validationPattern` parameters.
 
 You can check `example.html` file to see the plugin usage examples.
 
@@ -108,7 +108,7 @@ $('.tagsinput#tags').tagsInput({
   height: '100px', // standard option is 'auto'
   autocomplete: { option: value, option: value},
   hide: true,
-  delimiter: [',',';'], // or a string with a single delimiter. Ex: ';'
+  delimiter: [',',';'], // or a string with a single delimiter
   unique: true,
   removeWithBackspace: true,
   onAddTag: callback_function,
@@ -127,4 +127,4 @@ $('.tagsinput#tags').tagsInput({
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Krzysztof Rusnarczyk
+Copyright (c) 2017 Krzysztof Rusnarczyk
