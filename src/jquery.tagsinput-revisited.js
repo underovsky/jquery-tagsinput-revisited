@@ -29,7 +29,7 @@
 			
 			$('<span>').addClass('tag').append(
 				$('<span>').text(value),
-				$('<a>', {href: '#'}).click(function() {
+				$('<button>', {class: 'tag-remove'}).click(function() {
 					return $('#' + id).removeTag(encodeURI(value));
 				})
 			).insertBefore('#' + id + '_addTag');
