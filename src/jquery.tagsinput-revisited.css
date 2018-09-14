@@ -37,21 +37,25 @@
 	margin: 0 5px 5px 0;
 }
 
-.tagsinput .tag a {
+.tagsinput .tag .tag-remove {
 	position: absolute;
+	background: none;
 	display: block;
 	width: 30px;
 	height: 30px;
 	top: 0;
 	right: 0;
+	cursor: pointer;
 	text-decoration: none;
 	text-align: center;
 	color: #ff6b6b;
 	line-height: 30px;
+	padding: 0;
+	border: 0;
 }
 
-.tagsinput .tag a:before,
-.tagsinput .tag a:after {
+.tagsinput .tag .tag-remove:before,
+.tagsinput .tag .tag-remove:after {
 	background: #ff6b6b;
 	position: absolute;
 	display: block;
@@ -62,12 +66,12 @@
 	content: '';
 }
 
-.tagsinput .tag a:before {
+.tagsinput .tag .tag-remove:before {
 	-webkit-transform: rotateZ(45deg);
 	transform: rotateZ(45deg);
 }
 
-.tagsinput .tag a:after {
+.tagsinput .tag .tag-remove:after {
 	-webkit-transform: rotateZ(-45deg);
 	transform: rotateZ(-45deg);
 }
