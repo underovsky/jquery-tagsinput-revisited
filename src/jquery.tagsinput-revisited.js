@@ -27,7 +27,7 @@
 				return false;
 			}
 			
-			$('<span>').addClass('tag').append(
+			$('<span>', {class: 'tag'}).append(
 				$('<span>', {class: 'tag-text'}).text(value),
 				$('<button>', {class: 'tag-remove'}).click(function() {
 					return $('#' + id).removeTag(encodeURI(value));
