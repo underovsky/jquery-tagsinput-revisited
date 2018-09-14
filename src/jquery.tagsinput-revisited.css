@@ -42,6 +42,7 @@
 	border: 0;
 	cursor: pointer;
 	font-size: 8px;
+	padding: 0;
 	position: absolute;
 	display: block;
 	width: 30px;
