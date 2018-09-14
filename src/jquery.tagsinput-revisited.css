@@ -37,39 +37,25 @@
 	margin: 0 5px 5px 0;
 }
 
-.tagsinput .tag a {
+.tagsinput .tag .tag-remove {
+	background: none;
+	border: 0;
+	cursor: pointer;
+	font-size: 8px;
 	position: absolute;
 	display: block;
 	width: 30px;
 	height: 30px;
 	top: 0;
 	right: 0;
-	text-decoration: none;
 	text-align: center;
 	color: #ff6b6b;
 	line-height: 30px;
 }
 
-.tagsinput .tag a:before,
-.tagsinput .tag a:after {
-	background: #ff6b6b;
-	position: absolute;
-	display: block;
-	width: 10px;
-	height: 2px;
-	top: 14px;
-	left: 10px;
-	content: '';
-}
-
-.tagsinput .tag a:before {
-	-webkit-transform: rotateZ(45deg);
-	transform: rotateZ(45deg);
-}
-
-.tagsinput .tag a:after {
-	-webkit-transform: rotateZ(-45deg);
-	transform: rotateZ(-45deg);
+.tagsinput .tag .tag-remove:before {
+	color: #ff6b6b;
+	content: '\2573'; /* (U+2573, BOX DRAWINGS LIGHT DIAGONAL CROSS) */
 }
 
 .tagsinput div {
