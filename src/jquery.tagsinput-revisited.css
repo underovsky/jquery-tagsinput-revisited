@@ -54,7 +54,6 @@
 }
 
 .tagsinput .tag .tag-remove:before {
-	color: #ff6b6b;
 	content: '\2573'; /* (U+2573, BOX DRAWINGS LIGHT DIAGONAL CROSS) */
 }
 
