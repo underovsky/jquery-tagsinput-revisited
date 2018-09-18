@@ -27,9 +27,9 @@
 				return false;
 			}
 			
-			$('<span>').addClass('tag').append(
-				$('<span>').text(value),
-				$('<a>', {href: '#'}).click(function() {
+			$('<span>', {class: 'tag'}).append(
+				$('<span>', {class: 'tag-text'}).text(value),
+				$('<button>', {class: 'tag-remove'}).click(function() {
 					return $('#' + id).removeTag(encodeURI(value));
 				})
 			).insertBefore('#' + id + '_addTag');
@@ -155,11 +155,11 @@
 				callbacks[id]['onChange'] = settings.onChange;
 			}
 
-			var markup = '<div id="' + id + '_tagsinput" class="tagsinput"><div id="' + id + '_addTag">';
-
-			if (settings.interactive) {
-				markup = markup + '<input id="' + id + '_tag" value="" placeholder="' + settings.placeholder + '">';
-			}
+			var markup = $('<div>', {id: id + '_tagsinput', class: 'tagsinput'}).append(
+				$('<div>', {id: id + '_addTag'}).append(
+					settings.interactive ? $('<input>', {id: id + '_tag', class: 'tag-input', value: '', placeholder: settings.placeholder}) : null
+				)
+			);
 
 			$(markup).insertAfter(this);
 
