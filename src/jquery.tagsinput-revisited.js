@@ -21,6 +21,12 @@
 			if (tagslist[0] === '') tagslist = [];
 
 			value = jQuery.trim(value);
+
+			var settings = inputSettings[id]
+			if ( settings.whitelist && settings.whitelist.indexOf(value) == -1) {
+				return false;
+			}
+
 			
 			if ((inputSettings[id].unique && $(this).tagExist(value)) || !_validateTag(value, inputSettings[id], tagslist, delimiter[id])) {
 				$('#' + id + '_tag').addClass('error');
@@ -64,9 +70,12 @@
 		value = decodeURI(value);
 		
 		this.each(function() {
-			var id = $(this).attr('id');
-
+			var id  = $(this).attr('id');
 			var old = $(this).val().split(_getDelimiter(delimiter[id]));
+
+
+
+
 
 			$('#' + id + '_tagsinput .tag').remove();
 			
@@ -76,6 +85,7 @@
 					str = str + _getDelimiter(delimiter[id]) + old[i];
 				}
 			}
+
 
 			$.fn.tagsInput.importTags(this, str);
 
@@ -145,7 +155,8 @@
 				maxChars: settings.maxChars,
 				limit: settings.limit,
 				validationPattern: settings.validationPattern,
-				unique: settings.unique
+				unique: settings.unique,
+				whitelist: settings.whitelist
 			};
 
 			if (settings.onAddTag || settings.onRemoveTag || settings.onChange) {
