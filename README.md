@@ -1,3 +1,5 @@
+![Release](https://img.shields.io/github/v/release/underovsky/jquery-tagsinput-revisited)
+
 # jQuery Tags Input Revisited Plugin
 
 ## Basic information
