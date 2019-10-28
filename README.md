@@ -90,7 +90,7 @@ If you want a function to be called every time a tag is updated/deleted, set it 
 
 By default, if the cursor is immediately after a tag, hitting backspace will delete that tag. If you want to override this, set the `removeWithBackspace` option to false.
 
-For validation purposes you can use `unique`, `limit`, `minChars`, `maxChars` and `validationPattern` parameters.
+For validation purposes you can use `unique`, `limit`, `minChars`, `maxChars`, `whitelist` and `validationPattern` parameters.
 
 You can check `example.html` file to see the plugin usage examples.
 
@@ -111,6 +111,7 @@ $('.tagsinput#tags').tagsInput({
   delimiter: [',',';'], // or a string with a single delimiter
   unique: true,
   removeWithBackspace: true,
+  whitelist: [], // null or aray of whitelisted values
   onAddTag: callback_function,
   onRemoveTag: callback_function,
   onChange: callback_function

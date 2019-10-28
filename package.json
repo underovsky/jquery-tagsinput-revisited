@@ -1,7 +1,7 @@
 {
   "name": "jquery.tagsinput-revisited",
-  "version": "2.0.0",
-  "description": "",
+  "version": "2.1",
+  "description": "Revisited version of popular jQuery Tags Input Plugin",
   "main": "jquery.tagsinput-revisited",
   "directories": {
     "test": "test"
