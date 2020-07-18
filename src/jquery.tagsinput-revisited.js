@@ -249,7 +249,7 @@
 				var value = $(event.data.fake_input).val();
 				
 				value = value.replace(/\n/g, '');
-				value = value.replace(/\s/g, '');
+				value = value.replace(/\s/g, ' ');
 				
 				var tags = _splitIntoTags(event.data.delimiter, value);
 				
