@@ -75,7 +75,7 @@
 			$('#' + id + '_tagsinput .tag').remove();
 			
 			var str = '';
-			for (i = 0; i < old.length; ++i) {
+			for (var i = 0; i < old.length; ++i) {
 				if (old[i] != value) {
 					str = str + _getDelimiter(delimiter[id]) + old[i];
 				}
@@ -299,7 +299,7 @@
 		var id = $(obj).attr('id');
 		var tags = _splitIntoTags(delimiter[id], val); 
 		
-		for (i = 0; i < tags.length; ++i) {
+		for (var i = 0; i < tags.length; ++i) {
 			$(obj).addTag(tags[i], {
 				focus: false,
 				callback: false
